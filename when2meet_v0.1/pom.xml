@@ -115,12 +115,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.2</version>
+			<version>3.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -151,5 +146,10 @@
 			<version>1.9.11</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 	</dependencies>
 </project>
