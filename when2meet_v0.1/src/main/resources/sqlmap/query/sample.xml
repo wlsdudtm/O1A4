@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="com.naver.fashion.user">
+	<resultMap type="com.naver.fashion.model.UserModel" id="userModel">
+		<result column="USER_ID" property="userId" />
+		<result column="GENDER" property="gender" />
+		<result column="BIRTHDAY" property="birthday" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+	   USER_ID, USER_PWD, GENDER, BIRTHDAY
+	</sql>
+	
+	<select id="loginCheck" resultMap="userModel" parameterType="com.naver.fashion.model.UserModel">
+		select 
+		<include refid="Base_Column_List"/>
+		from
+		user_data
+		where user_id=#{userId}
+	</select>
+	
+	<insert id="join" parameterType="com.naver.fashion.model.UserModel">
+		insert into USER_DATA(
+		<include refid="Base_Column_List"/>
+		)		 
+		VALUES(
+			#{userId}, #{userPwd}, #{gender}, 
+			 TO_DATE(#{birthday},'MM-DD-YYYY')
+		)
+	</insert>
+</mapper>

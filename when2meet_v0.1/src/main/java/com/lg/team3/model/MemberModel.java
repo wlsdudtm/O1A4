@@ -1,28 +1,29 @@
 package com.lg.team3.model;
 
 public class MemberModel {
-	private int num;
-	private String id;
+	
+	private int id;
+	private String phoneNo;
 	private String pwd;
 	private String name;
-	public MemberModel(int num, String id, String pwd, String name) {
+	public MemberModel(int id, String phoneNo, String pwd, String name) {
 		super();
-		this.num = num;
 		this.id = id;
+		this.phoneNo = phoneNo;
 		this.pwd = pwd;
 		this.name = name;
 	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 	public String getPwd() {
 		return pwd;
@@ -38,9 +39,8 @@ public class MemberModel {
 	}
 	@Override
 	public String toString() {
-		return "MemberModel [num=" + num + ", id=" + id + ", pwd=" + pwd
-				+ ", name=" + name + "]";
+		return "MemberModel [id=" + id + ", phoneNo=" + phoneNo + ", pwd="
+				+ pwd + ", name=" + name + "]";
 	}
-	
 	
 }

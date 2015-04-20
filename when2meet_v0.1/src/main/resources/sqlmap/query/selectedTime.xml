@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="com.lg.team3.selectedTime">
+	<resultMap type="com.lg.team3.model.SelectedTimeModel" id="selectedTimeModel">
+		<result column="_id" property="id" />
+		<result column="party_member_id" property="partyMemberId" />
+		<result column="year" property="year" />
+		<result column="month" property="month" />
+		<result column="day" property="day" />
+		<result column="from_hour" property="fromHour" />
+		<result column="to_hour" property="toHour" />
+	</resultMap>
+</mapper>

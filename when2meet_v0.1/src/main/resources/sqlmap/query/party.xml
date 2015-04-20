@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="com.lg.team3.party">
+	<resultMap type="com.lg.team3.model.PartyModel" id="partyModel">
+		<result column="_id" property="id" />
+		<result column="title" property="phoneNo" />
+		<result column="from_year" property="fromYear" />
+		<result column="to_year" property="toYear" />
+		<result column="from_month" property="fromMonth" />
+		<result column="to_month" property="toMonth" />
+		<result column="from_day" property="fromDay" />
+		<result column="to_day" property="toDay" />
+		<result column="from_hour" property="fromHour" />
+		<result column="to_hour" property="toHour" />
+		<result column="master_id" property="masterId" />
+		<result column="is_progress" property="isProgress" />
+	</resultMap>
+</mapper>

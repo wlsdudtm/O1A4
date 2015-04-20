@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="com.lg.team3.partyMember">
+	<resultMap type="com.lg.team3.model.PartyMemberModel" id="partyMemberModel">
+		<result column="_id" property="id" />
+		<result column="member_id" property="memberId" />
+		<result column="party_id" property="partyId" />
+	</resultMap>
+</mapper>
