@@ -2,12 +2,10 @@ package com.lg.team3.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,15 +26,15 @@ public class MemberController {
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
 				request.getParameter("name"));
 		JSONObject jObject = new JSONObject();
-		if(memberService.isJoin(memberModel) == true) {
-			jObject.put("isSuccess", "duplicated");
-			return jObject;
-		}
 		
-		if (memberService.addMember(memberModel) == true) {
-			jObject.put("isSuccess", "true");
-		} else {
-			jObject.put("isSuccess", "false");
+		if(memberService.isExist(memberModel)) {
+			jObject.put("isSuccess", "duplicated");
+		}else{
+			if (memberService.addMember(memberModel) == true) {
+				jObject.put("isSuccess", "true");
+			} else {
+				jObject.put("isSuccess", "false");
+			}
 		}
 		return jObject;
 	}

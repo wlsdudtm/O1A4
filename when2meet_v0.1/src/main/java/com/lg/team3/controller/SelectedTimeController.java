@@ -20,7 +20,7 @@ public class SelectedTimeController {
 	@Autowired
 	MemberService memberService;
 
-	@RequestMapping("/createParty")
+	/*@RequestMapping("/createParty")
 	@ResponseBody
 	public JSONObject createParty(HttpServletRequest request) {
 		JSONObject jObject = new JSONObject();
@@ -40,5 +40,5 @@ public class SelectedTimeController {
 		boolean result = selectedTimeService.addSelectedTime();
 
 		return jObject;
-	}
+	}*/
 }

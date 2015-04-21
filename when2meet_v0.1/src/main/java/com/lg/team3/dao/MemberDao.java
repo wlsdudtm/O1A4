@@ -16,6 +16,11 @@ public class MemberDao extends SqlSessionDaoSupport{
 		int result = getSqlSession().selectOne(namespace+"isJoin", memberModel);
 		return (result != 0)? (true):(false);
 	}
+	
+	public boolean isExist(MemberModel memberModel){
+		int result = getSqlSession().selectOne(namespace+"isExist", memberModel);
+		return (result != 0)? (true):(false);
+	}
 
 	public MemberModel getMember(String phoneNo) {
 		return getSqlSession().selectOne(namespace+"getMember", phoneNo);

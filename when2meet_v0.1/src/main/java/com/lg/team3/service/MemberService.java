@@ -22,6 +22,11 @@ public class MemberService {
 		return memberDao.isJoin(memberModel);
 	}
 	
+	// 아이디 존재 여부 확인
+	public boolean isExist(MemberModel memberModel) {
+		return memberDao.isExist(memberModel);
+	}
+	
 	public MemberModel getMember(String phoneNo) {
 		return memberDao.getMember(phoneNo);
 	}
