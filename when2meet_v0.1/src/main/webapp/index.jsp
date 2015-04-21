@@ -13,7 +13,7 @@
 		<title>Welcome</title>
 	</head> 
 	<body>
-		<form action="move" method="post">
+		<form action="checkJoin" method="post">
 			<input type="submit" value="이동!">
 		</form>
 	</body>

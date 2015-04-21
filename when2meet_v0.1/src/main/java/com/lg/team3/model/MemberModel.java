@@ -13,6 +13,7 @@ public class MemberModel {
 		this.pwd = pwd;
 		this.name = name;
 	}
+	
 	public int getId() {
 		return id;
 	}

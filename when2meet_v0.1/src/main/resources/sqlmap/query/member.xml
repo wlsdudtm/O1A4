@@ -9,6 +9,22 @@
 		<result column="pwd" property="pwd" />
 		<result column="name" property="name" />
 	</resultMap>
-
+	
+	<sql id="Base_Column_List">
+	   phone_no, pwd, name
+	</sql>
+	
+	<insert id="addMember" parameterType="com.lg.team3.model.MemberModel">
+		insert into member(
+		<include refid="Base_Column_List"/>
+		)		 
+		VALUES(
+			#{phoneNo}, #{pwd}, #{name}
+		)
+	</insert>
+	
+	<select id="checkJoin" resultType="int" parameterType="com.lg.team3.model.MemberModel">
+		select count(1) from member where phone_no = #{phoneNo}
+	</select>
 
 </mapper>
