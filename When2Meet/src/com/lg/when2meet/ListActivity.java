@@ -70,6 +70,7 @@ public class ListActivity extends Activity {
 
 				/* datelist 임시 추가 */
 				datelist = new ArrayList<DateClass>();
+				datelist.clear();
 				datelist.add(new DateClass(21, 4, 2015, 1));
 				datelist.add(new DateClass(22, 4, 2015, 2));
 
