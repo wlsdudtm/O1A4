@@ -31,4 +31,32 @@ public class PartyMemberController {
 		System.out.println(json);
 		return json.toString();
 	}
+	
+	@RequestMapping("/insertPartyMember")
+	public JSONObject insertPartyMember(HttpServletRequest request) {
+		JSONObject jsonObject = new JSONObject();
+
+		PartyMemberModel partyMemberModel = new PartyMemberModel(0,
+				Integer.parseInt(request.getParameter("memberId")),
+				Integer.parseInt(request.getParameter("partyId")));
+		//PartyMemberModel partyMemberModel = new PartyMemberModel(0, 4, 1);
+		System.out.println("insertPartyMember");
+		partyMemberService.insertPartyMember(partyMemberModel);
+
+		return jsonObject;
+	}
+
+	@RequestMapping("/deletePartyMember")
+	public JSONObject deletePartyMember(HttpServletRequest request) {
+		JSONObject jsonObject = new JSONObject();
+
+		PartyMemberModel partyMemberModel = new PartyMemberModel(0,
+				Integer.parseInt(request.getParameter("memberId")),
+				Integer.parseInt(request.getParameter("partyId")));
+		//PartyMemberModel partyMemberModel = new PartyMemberModel(0, 4, 1);
+		System.out.println("deletePartyMember");
+		partyMemberService.deletePartyMember(partyMemberModel);
+
+		return jsonObject;
+	}
 }
