@@ -25,4 +25,10 @@
 		#{partyMemberId}, #{year}, #{month}, #{day}, #{fromHour}, #{toHour}
 		)
 	</insert>
+	
+	
+	<select id="">
+	
+	</select>
+	
 </mapper>
