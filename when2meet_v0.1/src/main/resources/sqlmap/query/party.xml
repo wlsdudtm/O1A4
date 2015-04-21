@@ -34,7 +34,11 @@
 		)
 	</insert>
 	
-	<select id="getLastParty" resultType="int" parameterType="int">
-		select _id from party where master_id = #{value} order by _id desc limit 1;
+	<select id="getLastParty" resultMap="partyModel" parameterType="int">
+		select * from party where master_id = #{value} order by _id desc limit 1;
 	</select>
+	
+	<delete id="deleteParty" parameterType="com.lg.team3.model.PartyModel">
+		delete from party where _id = #{id}
+	</delete>
 </mapper>

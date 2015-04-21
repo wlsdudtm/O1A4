@@ -22,7 +22,7 @@ public class MemberService {
 		return memberDao.checkJoin(memberModel);
 	}
 	
-	public int getMember(String phoneNo) {
+	public MemberModel getMember(String phoneNo) {
 		return memberDao.getMember(phoneNo);
 	}
 

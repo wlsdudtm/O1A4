@@ -17,8 +17,7 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (result != 0)? (true):(false);
 	}
 
-	public int getMember(String phoneNo) {
-		System.out.println(phoneNo);
+	public MemberModel getMember(String phoneNo) {
 		return getSqlSession().selectOne(namespace+"getMember", phoneNo);
 	}
 }

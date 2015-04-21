@@ -18,17 +18,13 @@ public class PartyService {
 		if (partyDao.addParty(partyModel) == false) {
 			return false;
 		}
-		System.out.println("addParty!!");
-		int lastPartyModelId = partyDao.getLastParty(memberModel.getId());
-		System.out.println("lastPartyModelId: " + lastPartyModelId);
-		System.out.println("get lastPartyModel!!");
-		PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberModel.getId(), lastPartyModelId);
+		partyModel = partyDao.getLastParty(memberModel.getId());
+		PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberModel.getId(), partyModel.getId());
 		
 		if (partyDao.addPartyMember(partyMemberModel) == false) {
-			//TODO: 파티 삭제
+			partyDao.deleteParty(partyModel);
 			return false;
 		}
-		System.out.println("addPartyMember!!");
 		return true;
 	}
 }

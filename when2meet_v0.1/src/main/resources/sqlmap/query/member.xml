@@ -27,8 +27,8 @@
 		select count(1) from member where phone_no = #{phoneNo} and pwd = #{pwd}
 	</select>
 	
-	<select id="getMember" resultType="int" parameterType="String">
-		select _id from member where phone_no = #{value}
+	<select id="getMember" resultMap="memberModel" parameterType="String">
+		select * from member where phone_no = #{value}
 	</select>
 
 </mapper>

@@ -25,10 +25,11 @@ public class PartyController {
 	@ResponseBody
 	public JSONObject createParty(HttpServletRequest request) {
 
-//		MemberModel memberModel = new MemberModel(0,
-//				request.getParameter("phoneNo"), request.getParameter("pwd"),
-//				"");
-		MemberModel memberModel = new MemberModel(0, "01028753885", "1234", "");
+		MemberModel memberModel = new MemberModel(0,
+				request.getParameter("phoneNo"), request.getParameter("pwd"),
+				"");
+		// MemberModel memberModel = new MemberModel(0, "01028753885", "1234",
+		// "");
 		// check is join
 		if (memberService.checkJoin(memberModel) == false) {
 			// TODO: return false;
@@ -36,31 +37,28 @@ public class PartyController {
 			jObject.put("isSuccess", "false");
 			return jObject;
 		}
-		System.out.println("Member Exist!!!");
 		// get memberModel
-//		memberModel = memberService.getMember(Integer.parseInt(request
-//				.getParameter("phoneNo")));
-		int memberId = memberService.getMember("01028753885");
-		System.out.println(memberId+"!!!");
-				
-//		PartyModel partyModel = new PartyModel(0,
-//				request.getParameter("title"), Integer.parseInt(request
-//						.getParameter("fromYear")), Integer.parseInt(request
-//						.getParameter("toYear")), Integer.parseInt(request
-//						.getParameter("fromMonth")), Integer.parseInt(request
-//						.getParameter("toMonth")), Integer.parseInt(request
-//						.getParameter("fromDay")), Integer.parseInt(request
-//						.getParameter("toDay")), Integer.parseInt(request
-//						.getParameter("fromHour")), Integer.parseInt(request
-//						.getParameter("toHour")), memberModel.getId(), true);
+		memberModel = memberService.getMember(request.getParameter("phoneNo"));
+		// memberModel = memberService.getMember("01028753885");
+		// System.out.println(memberModel);
 
 		PartyModel partyModel = new PartyModel(0,
-				"Yaho", 2014, 2014, 2, 2, 3, 4, 10, 12, 1, true);
-		
+				request.getParameter("title"), Integer.parseInt(request
+						.getParameter("fromYear")), Integer.parseInt(request
+						.getParameter("toYear")), Integer.parseInt(request
+						.getParameter("fromMonth")), Integer.parseInt(request
+						.getParameter("toMonth")), Integer.parseInt(request
+						.getParameter("fromDay")), Integer.parseInt(request
+						.getParameter("toDay")), Integer.parseInt(request
+						.getParameter("fromHour")), Integer.parseInt(request
+						.getParameter("toHour")), memberModel.getId(), true);
+
+		// PartyModel partyModel = new PartyModel(0,
+		// "Yaho", 2014, 2014, 2, 2, 3, 4, 10, 12, 1, true);
+
 		// createParty
 		boolean result = partyService
 				.addPartyAndMember(partyModel, memberModel);
-
 		/* make json string */
 		JSONObject jObject = new JSONObject();
 		if (result == true) {
@@ -68,9 +66,7 @@ public class PartyController {
 		} else {
 			jObject.put("isSuccess", "false");
 		}
-
 		/* make json string */
-		System.out.println(result);
 		return jObject;
 	}
 }

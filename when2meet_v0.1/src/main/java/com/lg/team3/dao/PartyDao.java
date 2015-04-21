@@ -18,8 +18,11 @@ public class PartyDao extends SqlSessionDaoSupport{
 		return (result != 0)? (true):(false);
 	}
 	
-	public int getLastParty(int id) {
-		int partyModelId = getSqlSession().selectOne(partyNamespace+"getLastParty", id);
-		return partyModelId;
+	public PartyModel getLastParty(int id) {
+		PartyModel partyModel = getSqlSession().selectOne(partyNamespace+"getLastParty", id);
+		return partyModel;
+	}
+	public void deleteParty(PartyModel partyModel) {
+		getSqlSession().selectOne(partyNamespace+"deleteParty", partyModel);
 	}
 }
