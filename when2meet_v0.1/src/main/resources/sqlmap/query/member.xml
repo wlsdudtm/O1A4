@@ -23,8 +23,8 @@
 		)
 	</insert>
 	
-	<select id="isJoin" resultType="int" parameterType="com.lg.team3.model.MemberModel">
-		select count(1) from member where phone_no = #{phoneNo} and pwd = #{pwd}
+	<select id="isJoin" resultMap ="memberModel" parameterType="com.lg.team3.model.MemberModel">
+		select * from member where phone_no = #{phoneNo} and pwd = #{pwd}
 	</select>
 	
 	<select id="isExist" resultType="int" parameterType="com.lg.team3.model.MemberModel">

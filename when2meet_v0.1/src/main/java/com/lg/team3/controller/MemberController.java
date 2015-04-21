@@ -46,13 +46,13 @@ public class MemberController {
 		MemberModel memberModel = new MemberModel(0,
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
 				"");
-		//MemberModel memberModel = new MemberModel(0, "23123232","23232","");
-		boolean result = memberService.isJoin(memberModel);
+		MemberModel result = memberService.isJoin(memberModel);
 
 		/* make json string */
 		JSONObject jObject = new JSONObject();
-		if (result == true) {
+		if (result != null) {
 			jObject.put("isSuccess", "true");
+			jObject.put("id", result.getId());
 		} else {
 			jObject.put("isSuccess", "false");
 		}

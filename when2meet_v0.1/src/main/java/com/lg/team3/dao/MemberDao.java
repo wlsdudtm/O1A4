@@ -12,9 +12,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (result != 0)? (true):(false);
 	}
 	
-	public boolean isJoin(MemberModel memberModel){
-		int result = getSqlSession().selectOne(namespace+"isJoin", memberModel);
-		return (result != 0)? (true):(false);
+	public MemberModel isJoin(MemberModel memberModel){
+		return  getSqlSession().selectOne(namespace+"isJoin", memberModel);
 	}
 	
 	public boolean isExist(MemberModel memberModel){

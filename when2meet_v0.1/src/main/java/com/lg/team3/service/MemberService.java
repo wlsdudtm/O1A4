@@ -18,7 +18,7 @@ public class MemberService {
 	}
 
 	// 로그인 체크
-	public boolean isJoin(MemberModel memberModel) {
+	public MemberModel isJoin(MemberModel memberModel) {
 		return memberDao.isJoin(memberModel);
 	}
 	
