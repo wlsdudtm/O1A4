@@ -27,16 +27,17 @@ public class MemberController {
 		MemberModel memberModel = new MemberModel(0,
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
 				request.getParameter("name"));
-		// MemberModel memberModel = new MemberModel(0,
-		// "23123232","23232","adssds");
-		boolean result = memberService.addMember(memberModel);
-		// System.out.println(result);
-
-		/* make json string */
 		JSONObject jObject = new JSONObject();
-		jObject.put("isSuccess", "true");
-		/* make json string */
-		// System.out.println(jObject.toString());
+		if(memberService.checkJoin(memberModel) == true) {
+			jObject.put("isSuccess", "duplicated");
+			return jObject;
+		}
+		
+		if (memberService.addMember(memberModel) == true) {
+			jObject.put("isSuccess", "true");
+		} else {
+			jObject.put("isSuccess", "false");
+		}
 		return jObject;
 	}
 
