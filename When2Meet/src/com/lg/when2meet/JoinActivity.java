@@ -20,7 +20,6 @@ public class JoinActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				join.setImageResource(R.drawable.button_join2_click);
 //				Intent intent = new Intent(ListActivity.this, ListActivity.class);
 //				startActivity(intent);
 			}
