@@ -23,7 +23,7 @@
 		)
 	</insert>
 	
-	<select id="checkJoin" resultType="int" parameterType="com.lg.team3.model.MemberModel">
+	<select id="isJoin" resultType="int" parameterType="com.lg.team3.model.MemberModel">
 		select count(1) from member where phone_no = #{phoneNo} and pwd = #{pwd}
 	</select>
 	

@@ -18,8 +18,8 @@ public class MemberService {
 	}
 
 	// 로그인 체크
-	public boolean checkJoin(MemberModel memberModel) {
-		return memberDao.checkJoin(memberModel);
+	public boolean isJoin(MemberModel memberModel) {
+		return memberDao.isJoin(memberModel);
 	}
 	
 	public MemberModel getMember(String phoneNo) {

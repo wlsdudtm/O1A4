@@ -12,7 +12,7 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return (result != 0)? (true):(false);
 	}
 	
-	public boolean checkJoin(MemberModel memberModel){
+	public boolean isJoin(MemberModel memberModel){
 		int result = getSqlSession().selectOne(namespace+"checkJoin", memberModel);
 		return (result != 0)? (true):(false);
 	}

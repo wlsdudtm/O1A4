@@ -31,7 +31,7 @@ public class PartyController {
 		// MemberModel memberModel = new MemberModel(0, "01028753885", "1234",
 		// "");
 		// check is join
-		if (memberService.checkJoin(memberModel) == false) {
+		if (memberService.isJoin(memberModel) == false) {
 			// TODO: return false;
 			JSONObject jObject = new JSONObject();
 			jObject.put("isSuccess", "false");

@@ -9,4 +9,9 @@ import com.lg.team3.dao.SelectedTimeDao;
 public class SelectedTimeService {
 	@Autowired
 	SelectedTimeDao selectedTimeDao;
+
+	public boolean addSelectedTime() {
+		
+		return false;
+	}
 }

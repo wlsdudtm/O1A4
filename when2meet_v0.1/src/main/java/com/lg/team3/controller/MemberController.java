@@ -28,7 +28,7 @@ public class MemberController {
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
 				request.getParameter("name"));
 		JSONObject jObject = new JSONObject();
-		if(memberService.checkJoin(memberModel) == true) {
+		if(memberService.isJoin(memberModel) == true) {
 			jObject.put("isSuccess", "duplicated");
 			return jObject;
 		}
@@ -43,13 +43,13 @@ public class MemberController {
 
 	@RequestMapping("/checkJoin")
 	@ResponseBody
-	public JSONObject checkJoin(HttpServletRequest request) {
+	public JSONObject isJoin(HttpServletRequest request) {
 
 		MemberModel memberModel = new MemberModel(0,
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
 				"");
 		//MemberModel memberModel = new MemberModel(0, "23123232","23232","");
-		boolean result = memberService.checkJoin(memberModel);
+		boolean result = memberService.isJoin(memberModel);
 
 		/* make json string */
 		JSONObject jObject = new JSONObject();
