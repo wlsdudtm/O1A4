@@ -7,6 +7,14 @@
 		<result column="_id" property="id" />
 		<result column="member_id" property="memberId" />
 		<result column="party_id" property="partyId" />
+		<collection column="" property="partyInfo" select="get" />
+	</resultMap>
+
+	<resultMap type="com.lg.team3.model.PartyInfoModel" id="partyInfoModel">
+		<result column="_id" property="partyId" />
+		<result column="title" property="title" />
+		<result column="is_progress" property="isProgress" />
+		<collection column="_id" property="memberList" select="getPartyMember"/>
 	</resultMap>
 
 	<sql id="PartyMember_Column_List">
@@ -24,5 +32,13 @@
 	
 	<select id="getMyParty" parameterType="int" resultMap="partyMemberModel">
 		select * from party_member where member_id=#{value}
+	</select>
+	
+	<select id="getPartyMember" resultMap="partyMemberModel">
+		select * from party_member where party_id=#{party_id}
+	</select>
+	
+	<select id="getMyPartyInfo" parameterType="int" resultMap="partyInfoModel">
+		select * from party where _id=#{value}
 	</select>
 </mapper>
