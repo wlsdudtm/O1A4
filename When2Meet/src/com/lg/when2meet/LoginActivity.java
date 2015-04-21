@@ -84,6 +84,8 @@ public class LoginActivity extends Activity {
 								editor.commit();
 								Intent intent = new Intent(getApplicationContext(),
 										ListActivity.class);
+								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+								intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(intent);
 							}else{
 								handler.sendMessage(Message.obtain());
