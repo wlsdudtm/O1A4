@@ -41,10 +41,10 @@ public class MemberController {
 	@RequestMapping("/checkJoin")
 	public JSONObject checkJoin(HttpServletRequest request) {
 
-//		MemberModel memberModel = new MemberModel(0,
-//				request.getParameter("phoneNo"), request.getParameter("pwd"),
-//				"");
-		MemberModel memberModel = new MemberModel(0, "23123232","23232","");
+		MemberModel memberModel = new MemberModel(0,
+				request.getParameter("phoneNo"), request.getParameter("pwd"),
+				"");
+		//MemberModel memberModel = new MemberModel(0, "23123232","23232","");
 		boolean result = memberService.checkJoin(memberModel);
 
 		/* make json string */
