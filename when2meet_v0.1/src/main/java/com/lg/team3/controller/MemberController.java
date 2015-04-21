@@ -27,7 +27,7 @@ public class MemberController {
 				request.getParameter("name"));
 		JSONObject jObject = new JSONObject();
 		
-		if(memberService.isExist(memberModel)) {
+		if(memberService.isExist(memberModel)!=null) {
 			jObject.put("isSuccess", "duplicated");
 		}else{
 			if (memberService.addMember(memberModel) == true) {

@@ -23,7 +23,7 @@ public class MemberService {
 	}
 	
 	// 아이디 존재 여부 확인
-	public boolean isExist(MemberModel memberModel) {
+	public MemberModel isExist(MemberModel memberModel) {
 		return memberDao.isExist(memberModel);
 	}
 	
