@@ -28,4 +28,8 @@ public class PartyMemberDao extends SqlSessionDaoSupport{
 		int result = getSqlSession().delete(partyMemberNameSpace+"deletePartyMember", partyMemberModel);
 		return (result != 0)? (true):(false);
 	}
+	
+	public PartyMemberModel getPartyMemberId(PartyMemberModel partyMemberModel){
+		return getSqlSession().selectOne(partyMemberNameSpace+"getPartyMemberId", partyMemberModel);
+	}
 }
