@@ -9,13 +9,6 @@
 		<result column="party_id" property="partyId" />
 	</resultMap>
 
-	<resultMap type="com.lg.team3.model.PartyInfoModel" id="partyInfoModel">
-		<result column="_id" property="partyId" />
-		<result column="title" property="title" />
-		<result column="is_progress" property="isProgress" />
-		<collection column="_id" property="memberList" select="getPartyMember"/>
-	</resultMap>
-	
 	<resultMap type="com.lg.team3.model.PartyModel" id="partyModel">
 		<result column="_id" property="id" />
 		<result column="title" property="title" />
@@ -30,6 +23,13 @@
 		<result column="master_id" property="masterId" />
 		<result column="is_progress" property="isProgress" />
 		<collection column="_id" property="memberList" select="getPartyMember"/>
+	</resultMap>
+
+	<resultMap type="com.lg.team3.model.MemberModel" id="memberModel">
+		<result column="_id" property="id" />
+		<result column="phone_no" property="phoneNo" />
+		<result column="pwd" property="pwd" />
+		<result column="name" property="name" />
 	</resultMap>
 
 	<sql id="PartyMember_Column_List">
@@ -49,8 +49,8 @@
 		select * from party_member where member_id=#{value}
 	</select>
 	
-	<select id="getPartyMember" resultMap="partyMemberModel">
-		select * from party_member where party_id=#{party_id}
+	<select id="getPartyMember" resultMap="memberModel">
+		select m._id, m.phone_no, m.pwd, m.name from party_member pm, member m where pm.member_id=m._id and pm.party_id=#{party_id}
 	</select>
 	
 	<select id="getMyPartyInfo" parameterType="int" resultMap="partyModel">

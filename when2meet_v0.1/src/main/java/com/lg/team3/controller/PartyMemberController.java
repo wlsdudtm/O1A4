@@ -28,7 +28,7 @@ public class PartyMemberController {
 		List<PartyMemberModel> partyList = partyMemberService.getMyPartyInfo(Integer.parseInt(request.getParameter("id")));
 		
 		json.put("partyList", JSONArray.fromObject(partyList));
-		
+		System.out.println(json);
 		return json.toString();
 	}
 }
