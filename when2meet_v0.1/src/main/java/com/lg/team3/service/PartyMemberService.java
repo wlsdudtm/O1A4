@@ -26,4 +26,13 @@ public class PartyMemberService {
 		
 		return partyMemberList;
 	}
+	
+	public boolean insertPartyMember(PartyMemberModel partyMemberModel) {
+		return partyMemberDao.addPartyMember(partyMemberModel);
+	}
+
+	public boolean deletePartyMember(PartyMemberModel partyMemberModel) {
+		
+		return partyMemberDao.deletePartyMember(partyMemberModel);
+	}
 }

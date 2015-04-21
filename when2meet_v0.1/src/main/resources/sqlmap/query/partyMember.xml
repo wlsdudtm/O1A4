@@ -45,6 +45,10 @@
 		)
 	</insert>
 	
+	<delete id="deletePartyMember" parameterType="com.lg.team3.model.PartyMemberModel">
+		delete from party_member where member_id = #{memberId} and party_id = #{partyId}
+	</delete>
+	
 	<select id="getMyParty" parameterType="int" resultMap="partyMemberModel">
 		select * from party_member where member_id=#{value}
 	</select>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.lg.team3.dao.MemberDao;
 import com.lg.team3.dao.PartyDao;
+import com.lg.team3.dao.PartyMemberDao;
 import com.lg.team3.model.MemberModel;
 import com.lg.team3.model.PartyMemberModel;
 import com.lg.team3.model.PartyModel;
@@ -13,6 +14,7 @@ import com.lg.team3.model.PartyModel;
 public class PartyService {
 	@Autowired
 	PartyDao partyDao;
+	PartyMemberDao partyMemberDao;
 
 	public boolean addPartyAndMember(PartyModel partyModel, MemberModel memberModel) {
 		if (partyDao.addParty(partyModel) == false) {
@@ -21,7 +23,7 @@ public class PartyService {
 		partyModel = partyDao.getLastParty(memberModel.getId());
 		PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberModel.getId(), partyModel.getId());
 		
-		if (partyDao.addPartyMember(partyMemberModel) == false) {
+		if (partyMemberDao.addPartyMember(partyMemberModel) == false) {
 			partyDao.deleteParty(partyModel);
 			return false;
 		}
