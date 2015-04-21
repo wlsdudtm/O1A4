@@ -17,6 +17,7 @@ public class MemberService {
 		return memberDao.addMember(memberModel);
 	}
 
+	// 로그인 체크
 	public boolean checkJoin(MemberModel memberModel) {
 		return memberDao.checkJoin(memberModel);
 	}

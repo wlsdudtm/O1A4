@@ -41,9 +41,10 @@ public class MemberController {
 	@RequestMapping("/checkJoin")
 	public JSONObject checkJoin(HttpServletRequest request) {
 
-		MemberModel memberModel = new MemberModel(0,
-				request.getParameter("phoneNo"), "", "");
-		// MemberModel memberModel = new MemberModel(0, "2313232","","");
+//		MemberModel memberModel = new MemberModel(0,
+//				request.getParameter("phoneNo"), request.getParameter("pwd"),
+//				"");
+		MemberModel memberModel = new MemberModel(0, "23123232","23232","");
 		boolean result = memberService.checkJoin(memberModel);
 
 		/* make json string */
@@ -54,7 +55,7 @@ public class MemberController {
 			jObject.put("isSuccess", "false");
 		}
 		/* make json string */
-		System.out.println(result);
+		 System.out.println(result);
 		return jObject;
 	}
 }
