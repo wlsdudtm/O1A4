@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lg.team3.model.MemberModel;
 import com.lg.team3.service.MemberService;
@@ -19,6 +20,7 @@ public class MemberController {
 	MemberService memberService;
 
 	@RequestMapping("/addMember")
+	@ResponseBody
 	// 회원가입
 	public JSONObject addMember(HttpServletRequest request) {
 
@@ -39,6 +41,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("/checkJoin")
+	@ResponseBody
 	public JSONObject checkJoin(HttpServletRequest request) {
 
 		MemberModel memberModel = new MemberModel(0,
