@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-					
+
 <mapper namespace="com.lg.team3.party">
 	<resultMap type="com.lg.team3.model.PartyModel" id="partyModel">
 		<result column="_id" property="id" />
-		<result column="title" property="phoneNo" />
+		<result column="title" property="title" />
 		<result column="from_year" property="fromYear" />
 		<result column="to_year" property="toYear" />
 		<result column="from_month" property="fromMonth" />
@@ -17,4 +17,24 @@
 		<result column="master_id" property="masterId" />
 		<result column="is_progress" property="isProgress" />
 	</resultMap>
+
+	<sql id="Party_Column_List">
+		title, from_year, to_year, from_month, to_month, from_day,
+		to_day,
+		from_hour, to_hour, master_id, is_progress
+	</sql>
+
+	<insert id="addParty" parameterType="com.lg.team3.model.PartyModel">
+		insert into party(
+		<include refid="Party_Column_List" />
+		)
+		VALUES(
+		#{title}, #{fromYear}, #{toYear}, #{fromMonth}, #{toMonth},
+		#{fromDay}, #{toDay}, #{fromHour}, #{toHour}, #{masterId}, #{isProgress}
+		)
+	</insert>
+	
+	<select id="getLastParty" resultType="int" parameterType="int">
+		select _id from party where master_id = #{value} order by _id desc limit 1;
+	</select>
 </mapper>

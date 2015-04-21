@@ -10,13 +10,13 @@
 		<result column="name" property="name" />
 	</resultMap>
 	
-	<sql id="Base_Column_List">
+	<sql id="Member_Column_List">
 	   phone_no, pwd, name
 	</sql>
 	
 	<insert id="addMember" parameterType="com.lg.team3.model.MemberModel">
 		insert into member(
-		<include refid="Base_Column_List"/>
+		<include refid="Member_Column_List"/>
 		)		 
 		VALUES(
 			#{phoneNo}, #{pwd}, #{name}
@@ -25,6 +25,10 @@
 	
 	<select id="checkJoin" resultType="int" parameterType="com.lg.team3.model.MemberModel">
 		select count(1) from member where phone_no = #{phoneNo} and pwd = #{pwd}
+	</select>
+	
+	<select id="getMember" resultType="int" parameterType="String">
+		select _id from member where phone_no = #{value}
 	</select>
 
 </mapper>

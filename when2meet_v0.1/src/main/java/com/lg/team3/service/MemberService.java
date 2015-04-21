@@ -21,5 +21,9 @@ public class MemberService {
 	public boolean checkJoin(MemberModel memberModel) {
 		return memberDao.checkJoin(memberModel);
 	}
+	
+	public int getMember(String phoneNo) {
+		return memberDao.getMember(phoneNo);
+	}
 
 }

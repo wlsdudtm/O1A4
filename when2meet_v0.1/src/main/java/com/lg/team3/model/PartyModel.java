@@ -12,11 +12,11 @@ public class PartyModel {
 	private int fromHour;
 	private int toHour;
 	private int masterId;
-	private int isProgress;
+	private boolean isProgress;
 	
 	public PartyModel(int id, String title, int fromYear, int toYear,
 			int fromMonth, int toMonth, int fromDay, int toDay, int fromHour,
-			int toHour, int masterId, int isProgress) {
+			int toHour, int masterId, boolean isProgress) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -97,10 +97,10 @@ public class PartyModel {
 	public void setMasterId(int masterId) {
 		this.masterId = masterId;
 	}
-	public int getIsProgress() {
+	public boolean getIsProgress() {
 		return isProgress;
 	}
-	public void setIsProgress(int isProgress) {
+	public void setIsProgress(boolean isProgress) {
 		this.isProgress = isProgress;
 	}
 	@Override
