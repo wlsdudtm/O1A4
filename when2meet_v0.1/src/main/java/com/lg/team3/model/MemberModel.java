@@ -6,6 +6,9 @@ public class MemberModel {
 	private String phoneNo;
 	private String pwd;
 	private String name;
+	
+	public MemberModel() {
+	}
 	public MemberModel(int id, String phoneNo, String pwd, String name) {
 		super();
 		this.id = id;

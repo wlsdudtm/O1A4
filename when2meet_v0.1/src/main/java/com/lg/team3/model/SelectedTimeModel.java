@@ -8,6 +8,9 @@ public class SelectedTimeModel {
 	private int day;
 	private int fromHour;
 	private int toHour;
+	
+	public SelectedTimeModel() {
+	}
 	public SelectedTimeModel(int id, int partyMemberId, int year, int month,
 			int day, int fromHour, int toHour) {
 		super();

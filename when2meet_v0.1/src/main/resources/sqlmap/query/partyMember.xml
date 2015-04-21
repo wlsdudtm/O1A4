@@ -21,4 +21,8 @@
 		#{memberId}, #{partyId}
 		)
 	</insert>
+	
+	<select id="getMyParty" parameterType="int" resultMap="partyMemberModel">
+		select * from party_member where member_id=#{value}
+	</select>
 </mapper>

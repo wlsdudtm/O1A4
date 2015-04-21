@@ -14,6 +14,8 @@ public class PartyModel {
 	private int masterId;
 	private boolean isProgress;
 	
+	public PartyModel() {
+	}
 	public PartyModel(int id, String title, int fromYear, int toYear,
 			int fromMonth, int toMonth, int fromDay, int toDay, int fromHour,
 			int toHour, int masterId, boolean isProgress) {
