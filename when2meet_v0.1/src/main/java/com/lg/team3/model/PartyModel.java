@@ -1,5 +1,7 @@
 package com.lg.team3.model;
 
+import java.util.List;
+
 public class PartyModel {
 	private int id;
 	private String title;
@@ -13,6 +15,7 @@ public class PartyModel {
 	private int toHour;
 	private int masterId;
 	private boolean isProgress;
+	private List<MemberModel> memberList;
 	
 	public PartyModel() {
 	}
@@ -105,13 +108,21 @@ public class PartyModel {
 	public void setIsProgress(boolean isProgress) {
 		this.isProgress = isProgress;
 	}
+	public List<MemberModel> getMemberList() {
+		return memberList;
+	}
+	public void setMemberList(List<MemberModel> memberList) {
+		this.memberList = memberList;
+	}
 	@Override
 	public String toString() {
 		return "PartyModel [id=" + id + ", title=" + title + ", fromYear="
 				+ fromYear + ", toYear=" + toYear + ", fromMonth=" + fromMonth
 				+ ", toMonth=" + toMonth + ", fromDay=" + fromDay + ", toDay="
 				+ toDay + ", fromHour=" + fromHour + ", toHour=" + toHour
-				+ ", masterId=" + masterId + ", isProgress=" + isProgress + "]";
+				+ ", masterId=" + masterId + ", isProgress=" + isProgress
+				+ ", memberList=" + memberList + "]";
 	}
+
 	
 }

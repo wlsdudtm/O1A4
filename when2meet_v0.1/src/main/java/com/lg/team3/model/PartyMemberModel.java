@@ -4,7 +4,7 @@ public class PartyMemberModel {
 	private int id;
 	private int memberId;
 	private int partyId;
-	private PartyInfoModel partyInfo;
+	private PartyModel partyInfo;
 	
 	public PartyMemberModel() {
 	}
@@ -34,11 +34,11 @@ public class PartyMemberModel {
 		this.partyId = partyId;
 	}
 
-	public PartyInfoModel getPartyInfo() {
+	public PartyModel getPartyInfo() {
 		return partyInfo;
 	}
 
-	public void setPartyList(PartyInfoModel partyInfo) {
+	public void setPartyInfo(PartyModel partyInfo) {
 		this.partyInfo = partyInfo;
 	}
 
