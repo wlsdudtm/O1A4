@@ -7,12 +7,27 @@
 		<result column="_id" property="id" />
 		<result column="member_id" property="memberId" />
 		<result column="party_id" property="partyId" />
-		<collection column="" property="partyInfo" select="get" />
 	</resultMap>
 
 	<resultMap type="com.lg.team3.model.PartyInfoModel" id="partyInfoModel">
 		<result column="_id" property="partyId" />
 		<result column="title" property="title" />
+		<result column="is_progress" property="isProgress" />
+		<collection column="_id" property="memberList" select="getPartyMember"/>
+	</resultMap>
+	
+	<resultMap type="com.lg.team3.model.PartyModel" id="partyModel">
+		<result column="_id" property="id" />
+		<result column="title" property="title" />
+		<result column="from_year" property="fromYear" />
+		<result column="to_year" property="toYear" />
+		<result column="from_month" property="fromMonth" />
+		<result column="to_month" property="toMonth" />
+		<result column="from_day" property="fromDay" />
+		<result column="to_day" property="toDay" />
+		<result column="from_hour" property="fromHour" />
+		<result column="to_hour" property="toHour" />
+		<result column="master_id" property="masterId" />
 		<result column="is_progress" property="isProgress" />
 		<collection column="_id" property="memberList" select="getPartyMember"/>
 	</resultMap>
@@ -38,7 +53,7 @@
 		select * from party_member where party_id=#{party_id}
 	</select>
 	
-	<select id="getMyPartyInfo" parameterType="int" resultMap="partyInfoModel">
+	<select id="getMyPartyInfo" parameterType="int" resultMap="partyModel">
 		select * from party where _id=#{value}
 	</select>
 </mapper>

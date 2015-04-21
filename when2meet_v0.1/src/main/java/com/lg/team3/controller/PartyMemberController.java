@@ -12,7 +12,7 @@ public class PartyMemberController {
 	PartyMemberService partyMemberService;
 	
 	@RequestMapping("/getMyParty")
-	public void getMyParty(){
-		System.out.println(partyMemberService.getMyParty(1));
+	public void getMyPartyInfo(){
+		System.out.println(partyMemberService.getMyPartyInfo(1));
 	}
 }
