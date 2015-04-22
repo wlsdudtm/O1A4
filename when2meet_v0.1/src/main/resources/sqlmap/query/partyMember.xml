@@ -8,6 +8,31 @@
 		<result column="member_id" property="memberId" />
 		<result column="party_id" property="partyId" />
 	</resultMap>
+	
+	<resultMap type="com.lg.team3.model.PartyModel" id="partyModel">
+		<result column="_id" property="id" />
+		<result column="title" property="title" />
+		<result column="from_hour" property="fromHour" />
+		<result column="to_hour" property="toHour" />
+		<collection column="_id" property="memberList" select="getPartyMember"/>
+	</resultMap>
+	
+	<resultMap type="com.lg.team3.model.MemberModel" id="memberModel">
+		<result column="_id" property="id" />
+		<result column="pwd" property="pwd" />
+		<result column="name" property="name" />
+	</resultMap>
 
+	<select id="getMyParty" parameterType="int" resultMap="partyMemberModel">
+		select * from party_member where member_id=#{value}
+	</select>
+	
+	<select id="getPartyMember" resultMap="memberModel">
+		select m._id, m.pwd, m.name from party_member pm, member m where pm.member_id=m._id and pm.party_id=#{party_id}
+	</select>
+	
+	<select id="getMyPartyInfo" parameterType="int" resultMap="partyModel">
+		select * from party where _id=#{value}
+	</select>
 	
 </mapper>
