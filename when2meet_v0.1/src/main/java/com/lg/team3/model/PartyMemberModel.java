@@ -2,34 +2,42 @@ package com.lg.team3.model;
 
 public class PartyMemberModel {
 	private int id;
-	private int memberId;
+	private String memberId;
 	private int partyId;
 	private PartyModel partyInfo;
-	
+
 	public PartyMemberModel() {
 	}
-	
-	public PartyMemberModel(int id, int memberId, int partyId) {
+
+	public PartyMemberModel(int id, String memberId, int partyId,
+			PartyModel partyInfo) {
 		super();
 		this.id = id;
 		this.memberId = memberId;
 		this.partyId = partyId;
+		this.partyInfo = partyInfo;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMemberId() {
+
+	public String getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(int memberId) {
+
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
 	public int getPartyId() {
 		return partyId;
 	}
+
 	public void setPartyId(int partyId) {
 		this.partyId = partyId;
 	}
@@ -47,7 +55,5 @@ public class PartyMemberModel {
 		return "PartyMemberModel [id=" + id + ", memberId=" + memberId
 				+ ", partyId=" + partyId + ", partyInfo=" + partyInfo + "]";
 	}
-	
-	
-	
+
 }

@@ -14,6 +14,7 @@
 		<result column="title" property="title" />
 		<result column="from_hour" property="fromHour" />
 		<result column="to_hour" property="toHour" />
+		<result column="master_id" property="masterId"/>
 		<collection column="_id" property="memberList" select="getPartyMember"/>
 	</resultMap>
 	
@@ -22,6 +23,10 @@
 		<result column="pwd" property="pwd" />
 		<result column="name" property="name" />
 	</resultMap>
+	
+	<sql id="Party_Member_Column_List">
+		member_id, party_id
+	</sql>
 
 	<select id="getMyParty" parameterType="int" resultMap="partyMemberModel">
 		select * from party_member where member_id=#{value}
@@ -34,5 +39,15 @@
 	<select id="getMyPartyInfo" parameterType="int" resultMap="partyModel">
 		select * from party where _id=#{value}
 	</select>
+	
+	<insert id="insertPartyMember" parameterType="com.lg.team3.model.PartyMemberModel">
+		insert into party_member 
+		(
+		<include refid="Party_Member_Column_List"/>
+		)
+		values (
+			#{memberId}, #{partyId}
+		)
+	</insert>
 	
 </mapper>

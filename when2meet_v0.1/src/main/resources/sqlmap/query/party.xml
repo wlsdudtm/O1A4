@@ -8,6 +8,24 @@
 		<result column="title" property="title" />
 		<result column="from_hour" property="fromHour" />
 		<result column="to_hour" property="toHour" />
+		<result column="master_id" property="masterId" />
 	</resultMap>
+	<sql id="Party_Column_List">
+		title, from_hour, to_hour, master_id
+	</sql>
+
+	<insert id="insertParty" parameterType="com.lg.team3.model.PartyModel">
+		insert into party
+		(
+		<include refid="Party_Column_List" />
+		)
+		values(
+		#{title}, #{fromHour}, #{toHour}, #{masterId}
+		)
+	</insert>
+	
+	<select id="getLastParty" resultMap="partyModel" parameterType="String">
+		select * from party where master_id = #{value} order by _id desc limit 1
+	</select>
 
 </mapper>

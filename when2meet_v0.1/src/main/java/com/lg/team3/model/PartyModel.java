@@ -7,18 +7,20 @@ public class PartyModel {
 	private String title;
 	private int fromHour;
 	private int toHour;
+	private String masterId;
 	private List<MemberModel> memberList;
 	
 	public PartyModel() {
 	}
 
 	public PartyModel(int id, String title, int fromHour, int toHour,
-			List<MemberModel> memberList) {
+			String masterId, List<MemberModel> memberList) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.fromHour = fromHour;
 		this.toHour = toHour;
+		this.masterId = masterId;
 		this.memberList = memberList;
 	}
 
@@ -54,6 +56,14 @@ public class PartyModel {
 		this.toHour = toHour;
 	}
 
+	public String getMasterId() {
+		return masterId;
+	}
+
+	public void setMasterId(String masterId) {
+		this.masterId = masterId;
+	}
+
 	public List<MemberModel> getMemberList() {
 		return memberList;
 	}
@@ -65,9 +75,8 @@ public class PartyModel {
 	@Override
 	public String toString() {
 		return "PartyModel [id=" + id + ", title=" + title + ", fromHour="
-				+ fromHour + ", toHour=" + toHour + ", memberList="
-				+ memberList + "]";
+				+ fromHour + ", toHour=" + toHour + ", masterId=" + masterId
+				+ ", memberList=" + memberList + "]";
 	}
-
 	
 }

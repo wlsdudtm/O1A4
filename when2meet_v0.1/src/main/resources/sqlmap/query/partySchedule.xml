@@ -11,5 +11,16 @@
 		<result column="month" property="month" />
 		<result column="day" property="day" />
 	</resultMap>
-
+	<sql id="Party_Schedule_Column_List">
+		party_id, year, month, day
+	</sql>
+	<insert id="insertPartySchedule" parameterType="com.lg.team3.model.PartyScheduleModel">
+		insert into party_schedule
+		(
+		<include refid="Party_Schedule_Column_List"/>
+		)
+		values(
+			#{partyId}, #{year}, #{month}, #{day}
+		)
+	</insert>
 </mapper>
