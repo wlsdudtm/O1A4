@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lg.team3.dao.PartyMemberDao;
+import com.lg.team3.model.MemberModel;
 import com.lg.team3.model.PartyInfoModel;
 import com.lg.team3.model.PartyMemberModel;
 
@@ -34,5 +35,15 @@ public class PartyMemberService {
 	public boolean deletePartyMember(PartyMemberModel partyMemberModel) {
 		
 		return partyMemberDao.deletePartyMember(partyMemberModel);
+	}
+
+	public boolean isPartyEmpty(int partyId) {
+		List<PartyMemberModel> partyMemberModels = partyMemberDao.getPartyMemberList(partyId);
+		System.out.println(partyMemberModels.size());
+		if (partyMemberModels.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

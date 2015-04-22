@@ -24,9 +24,14 @@ public class PartyService {
 		PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberModel.getId(), partyModel.getId());
 		
 		if (partyMemberDao.addPartyMember(partyMemberModel) == false) {
-			partyDao.deleteParty(partyModel);
+			partyDao.deleteParty(partyModel.getId());
 			return false;
 		}
 		return true;
+	}
+	
+	public boolean deleteParty(int partyId) {
+		
+		return partyDao.deleteParty(partyId);
 	}
 }
