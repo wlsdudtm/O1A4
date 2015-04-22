@@ -30,8 +30,5 @@
 		select * from member where _id = #{id}
 	</select>
 	
-	<select id="getMember" resultMap="memberModel" parameterType="String">
-		select * from member where _id = #{value}
-	</select>
 
 </mapper>

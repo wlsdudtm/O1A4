@@ -26,9 +26,6 @@ public class MemberService {
 	public MemberModel isExist(MemberModel memberModel) {
 		return memberDao.isExist(memberModel);
 	}
-	
-	public MemberModel getMember(String phoneNo) {
-		return memberDao.getMember(phoneNo);
-	}
+
 
 }

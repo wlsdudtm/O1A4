@@ -20,7 +20,4 @@ public class MemberDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne(namespace+"isExist", memberModel);
 	}
 
-	public MemberModel getMember(String phoneNo) {
-		return getSqlSession().selectOne(namespace+"getMember", phoneNo);
-	}
 }
