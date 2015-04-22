@@ -1,6 +1,8 @@
 package com.lg.team3.controller;
 
 //import net.sf.json.JSONObject;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lg.team3.model.MemberModel;
+import com.lg.team3.model.MScheduleInfoModel;
 import com.lg.team3.model.MemberScheduleModel;
 import com.lg.team3.service.MemberScheduleService;
 import com.lg.team3.service.MemberService;
@@ -20,7 +22,7 @@ import com.lg.team3.service.MemberService;
 @Controller
 public class MemberScheduleController {
 	@Autowired
-	MemberScheduleService MemberScheduleService;
+	MemberScheduleService memberScheduleService;
 	@Autowired
 	MemberService memberService;
 
@@ -66,7 +68,7 @@ public class MemberScheduleController {
 					Integer.parseInt(selectData.get("day").toString()),
 					Integer.parseInt(selectData.get("hour").toString()));
 
-			if (MemberScheduleService.insertMemberSchedule(memberScheduleModel) == false) {
+			if (memberScheduleService.insertMemberSchedule(memberScheduleModel) == false) {
 				System.out.println("addSelectedTime Error!!! : " + selectData);
 				continue;
 			}
@@ -77,5 +79,18 @@ public class MemberScheduleController {
 		jObject.put("isSuccess", "true");
 
 		return jObject;
+	}
+	
+	@RequestMapping("/getMemberSchedule")
+	@ResponseBody
+	public String getMemberSchedule(HttpServletRequest request){
+		
+		JSONObject jObject = new JSONObject();
+		
+		List<MScheduleInfoModel> selectedTimeList = memberScheduleService.getMemberSchedule(Integer.parseInt(request.getParameter("partyId")));
+		
+		jObject.put("voteList", net.sf.json.JSONArray.fromObject(selectedTimeList));
+		System.out.println("getMemberSchedule : "+jObject);
+		return jObject.toString();
 	}
 }

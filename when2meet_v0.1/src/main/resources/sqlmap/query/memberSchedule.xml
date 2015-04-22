@@ -12,14 +12,13 @@
 		<result column="hour" property="hour" />
 	</resultMap>
 	
-	<resultMap type="com.lg.team3.model.TimeInfoModel" id="timeInfoModel">
-		<result column="phone_no" property="phoneNo" />
+	<resultMap type="com.lg.team3.model.MScheduleInfoModel" id="mScheduleInfoModel">
+		<result column="_id" property="id" />
 		<result column="name" property="name" />
 		<result column="year" property="year" />
 		<result column="month" property="month" />
 		<result column="day" property="day" />
-		<result column="from_hour" property="fromHour" />
-		<result column="to_hour" property="toHour" />
+		<result column="hour" property="hour" />
 	</resultMap>
 
 	<sql id="Member_Schedule_Column_List">
@@ -36,5 +35,16 @@
 		)
 	</insert>
 	
+	<select id="getMemberSchedule" resultMap="mScheduleInfoModel" parameterType="int">
+		select 
+		 m._id, m.name, year, month, day, hour
+		 from member m,
+		(select 
+		  member_id, party_id, year, month, day, hour
+		 from 
+		 party_member pm, member_schedule ms 
+		 where pm.party_id=#{value} and pm._id=ms.party_member_id) sel
+		where m._id=sel.member_id
+	</select>
 	
 </mapper>
