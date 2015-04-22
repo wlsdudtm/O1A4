@@ -22,10 +22,19 @@
 		<result column="to_hour" property="toHour" />
 	</resultMap>
 
-	<sql id="Selected_Time_Column_List">
-		party_member_id, year, month, day, hour, to_hour
+	<sql id="Member_Schedule_Column_List">
+		party_member_id, year, month, day, hour
 	</sql>
-
+	
+	<insert id="insertMemberSchedule" parameterType="com.lg.team3.model.MemberScheduleModel">
+		insert into member_schedule 
+		(
+		<include refid="Member_Schedule_Column_List"/>
+		)
+		VALUES(
+			#{partyMemberId}, #{year}, #{month}, #{day}, #{hour}
+		)
+	</insert>
 	
 	
 </mapper>
