@@ -32,4 +32,10 @@ public class PartyMemberDao extends SqlSessionDaoSupport{
 	public PartyMemberModel getPartyMemberId(PartyMemberModel partyMemberModel){
 		return getSqlSession().selectOne(partyMemberNameSpace+"getPartyMemberId", partyMemberModel);
 	}
+
+	public List<PartyMemberModel> getPartyMemberList(int partyId) {
+		List<PartyMemberModel> partyMemberModels = getSqlSession().selectList(partyMemberNameSpace+"getPartyMemberList", partyId);
+		System.out.println(partyMemberModels);
+		return partyMemberModels;
+	}
 }

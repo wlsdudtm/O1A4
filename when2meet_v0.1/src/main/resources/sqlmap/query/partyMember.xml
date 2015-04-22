@@ -64,4 +64,8 @@
 	<select id="getPartyMemberId" resultMap="partyMemberModel" parameterType="com.lg.team3.model.PartyMemberModel">
 		select * from party_member where member_id=#{memberId} and party_id=#{partyId}
 	</select>
+	
+	<select id="getPartyMemberList" resultMap="partyMemberModel" parameterType="int">
+		select * from party_member where party_id = #{value}
+	</select>
 </mapper>

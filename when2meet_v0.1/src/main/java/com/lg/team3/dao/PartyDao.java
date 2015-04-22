@@ -18,7 +18,9 @@ public class PartyDao extends SqlSessionDaoSupport{
 		PartyModel partyModel = getSqlSession().selectOne(partyNamespace+"getLastParty", id);
 		return partyModel;
 	}
-	public void deleteParty(PartyModel partyModel) {
-		getSqlSession().selectOne(partyNamespace+"deleteParty", partyModel);
+	public boolean deleteParty(int partyId) {
+		int result = getSqlSession().delete(partyNamespace+"deleteParty", partyId);
+		System.out.println(result);
+		return (result != 0)? (true):(false);
 	}
 }
