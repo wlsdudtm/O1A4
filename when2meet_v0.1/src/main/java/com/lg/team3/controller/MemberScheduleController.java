@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lg.team3.model.MScheduleInfoModel;
+import com.lg.team3.model.MemberModel;
 import com.lg.team3.model.MemberScheduleModel;
 import com.lg.team3.service.MemberScheduleService;
 import com.lg.team3.service.MemberService;
@@ -32,23 +33,23 @@ public class MemberScheduleController {
 		JSONObject jObject = new JSONObject();
 
 		/* Login Check */
-		// MemberModel memberModel = new MemberModel(
-		// request.getParameter("phoneNo"), request.getParameter("pwd"),
-		// "");
-		// // check is join
-		// if (memberService.isJoin(memberModel) == null) {
-		// jObject.put("isSuccess", "false");
-		// return jObject;
-		// }
+		MemberModel memberModel = new MemberModel(
+				request.getParameter("phoneNo"), request.getParameter("pwd"),
+				"");
+		// check is join
+		if (memberService.isJoin(memberModel) == null) {
+			jObject.put("isSuccess", "false");
+			return jObject;
+		}
 		/* Login Check */
 
 		/* get jsonArray */
 		JSONParser parser = new JSONParser();
-		// String data = request.getParameter("data");
-		String data = "[{\"partyMemberId\":\"1\", \"year\":\"2015\", "
-				+ "\"month\":\"1\", \"day\":\"2\",\"hour\":\"12\"}, "
-				+ "{\"partyMemberId\":\"1\", \"year\":\"2015\", "
-				+ "\"month\":\"1\", \"day\":\"3\",\"hour\":\"12\"}]";
+		String data = request.getParameter("data");
+		// String data = "[{\"partyMemberId\":\"1\", \"year\":\"2015\", "
+		// + "\"month\":\"1\", \"day\":\"2\",\"hour\":\"12\"}, "
+		// + "{\"partyMemberId\":\"1\", \"year\":\"2015\", "
+		// + "\"month\":\"1\", \"day\":\"3\",\"hour\":\"12\"}]";
 		JSONObject selectData = null;
 		JSONArray jsonArray = null;
 		try {
@@ -80,17 +81,20 @@ public class MemberScheduleController {
 
 		return jObject;
 	}
-	
+
 	@RequestMapping("/getMemberSchedule")
 	@ResponseBody
-	public String getMemberSchedule(HttpServletRequest request){
-		
+	public String getMemberSchedule(HttpServletRequest request) {
+
 		JSONObject jObject = new JSONObject();
-		
-		List<MScheduleInfoModel> selectedTimeList = memberScheduleService.getMemberSchedule(Integer.parseInt(request.getParameter("partyId")));
-		
-		jObject.put("voteList", net.sf.json.JSONArray.fromObject(selectedTimeList));
-		System.out.println("getMemberSchedule : "+jObject);
+
+		List<MScheduleInfoModel> selectedTimeList = memberScheduleService
+				.getMemberSchedule(Integer.parseInt(request
+						.getParameter("partyId")));
+
+		jObject.put("voteList",
+				net.sf.json.JSONArray.fromObject(selectedTimeList));
+		System.out.println("getMemberSchedule : " + jObject);
 		return jObject.toString();
 	}
 }
