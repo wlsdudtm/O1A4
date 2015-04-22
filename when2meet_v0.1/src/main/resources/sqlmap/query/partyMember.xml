@@ -28,6 +28,10 @@
 		member_id, party_id
 	</sql>
 
+	<select id="getPartyMemberId" parameterType="com.lg.team3.model.PartyMemberModel" resultType="int">
+		select _id from party_member where member_id=#{memberId} and party_id=#{partyId}
+	</select>
+
 	<select id="getMyParty" parameterType="String" resultMap="partyMemberModel">
 		select * from party_member where member_id=#{value}
 	</select>

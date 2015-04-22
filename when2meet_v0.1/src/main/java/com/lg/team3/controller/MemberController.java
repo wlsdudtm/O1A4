@@ -1,5 +1,7 @@
 package com.lg.team3.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +74,14 @@ public class MemberController {
 		List<MemberModel> memberList = memberService.getMembersById(request.getParameter("memberId"));
 		jObject.put("memberList", JSONArray.fromObject(memberList));
 		
-		return jObject.toString();
+		String str = jObject.toString();
+		String encode_str = "";
+		try {
+			encode_str = URLEncoder.encode(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return encode_str;
 	}
 	
 }

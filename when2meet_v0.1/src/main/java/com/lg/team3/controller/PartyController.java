@@ -36,10 +36,10 @@ public class PartyController {
 	@ResponseBody
 	public JSONObject createParty(HttpServletRequest request) {
 		JSONObject jObject = new JSONObject();
-
+		System.out.println("createParty : "+request.getParameter("partySchedule"));
 		/* Login Check */
 		MemberModel memberModel = new MemberModel(
-				request.getParameter("phoneNo"), request.getParameter("pwd"),
+				request.getParameter("id"), request.getParameter("pwd"),
 				"");
 		// check is join
 		memberModel = memberService.isJoin(memberModel);
@@ -106,17 +106,11 @@ public class PartyController {
 		jObject.put("partyInfoList", net.sf.json.JSONArray.fromObject(partyInfoList));
 		String str = jObject.toString();
 		String encode_str = "";
-		String decode_str = "";
 		try {
 			encode_str = URLEncoder.encode(str, "UTF-8");
-			System.out.println("@"+str);
-			System.out.println("@@ "+encode_str);
-			decode_str = URLDecoder.decode(encode_str, "UTF-8");
-			System.out.println("@@@ "+decode_str);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return str;
+		return encode_str;
 	}
 }

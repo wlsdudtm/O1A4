@@ -39,4 +39,8 @@ public class PartyMemberDao extends SqlSessionDaoSupport {
 	public int isExistPartyMember(int partyId){
 		return getSqlSession().selectOne(namespace+"isExistPartyMember", partyId);
 	}
+	
+	public int getPartyMemberId(PartyMemberModel partyMemberModel){
+		return getSqlSession().selectOne(namespace+"getPartyMemberId", partyMemberModel);
+	}
 }

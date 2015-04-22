@@ -1,5 +1,8 @@
 package com.lg.team3.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +38,14 @@ public class PartyMemberController {
 		
 		json.put("partyList", JSONArray.fromObject(partyList));
 		System.out.println(json);
-		return json.toString();
+		String str = json.toString();
+		String encode_str = "";
+		try {
+			encode_str = URLEncoder.encode(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return encode_str;
 	}
 	
 	@RequestMapping("/deletePartyMember")

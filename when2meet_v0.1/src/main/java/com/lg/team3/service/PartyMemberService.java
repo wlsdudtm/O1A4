@@ -57,5 +57,8 @@ public class PartyMemberService {
 		}		
 	}
 	
+	public int getPartyMemberId(PartyMemberModel partyMemberModel){
+		return partyMemberDao.getPartyMemberId(partyMemberModel);
+	}
 
 }

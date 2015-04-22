@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lg.team3.model.MScheduleInfoModel;
 import com.lg.team3.model.MemberModel;
 import com.lg.team3.model.MemberScheduleModel;
+import com.lg.team3.model.PartyMemberModel;
 import com.lg.team3.service.MemberScheduleService;
 import com.lg.team3.service.MemberService;
+import com.lg.team3.service.PartyMemberService;
 
 @Controller
 public class MemberScheduleController {
@@ -26,12 +28,14 @@ public class MemberScheduleController {
 	MemberScheduleService memberScheduleService;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	PartyMemberService partyMemberService;
 
 	@RequestMapping("/insertMemberSchedule")
 	@ResponseBody
 	public JSONObject insertMemberSchedule(HttpServletRequest request) {
 		JSONObject jObject = new JSONObject();
-
+		System.out.println("@@@ insertMemberSchedule");
 		/* Login Check */
 		MemberModel memberModel = new MemberModel(
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
@@ -46,9 +50,9 @@ public class MemberScheduleController {
 		/* get jsonArray */
 		JSONParser parser = new JSONParser();
 		String data = request.getParameter("data");
-		// String data = "[{\"partyMemberId\":\"1\", \"year\":\"2015\", "
+		// String data = "[{\"partyId\":\"1\", \"memberId\":\"010\", \"year\":\"2015\", "
 		// + "\"month\":\"1\", \"day\":\"2\",\"hour\":\"12\"}, "
-		// + "{\"partyMemberId\":\"1\", \"year\":\"2015\", "
+		// + "{\"partyId\":\"1\", \"memberId\":\"010\" , \"year\":\"2015\", "
 		// + "\"month\":\"1\", \"day\":\"3\",\"hour\":\"12\"}]";
 		JSONObject selectData = null;
 		JSONArray jsonArray = null;
@@ -58,12 +62,15 @@ public class MemberScheduleController {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < jsonArray.size(); i++) {
-
 			selectData = (JSONObject) jsonArray.get(i);
-
+			System.out.println("@@ "+selectData);
+			String partyId = selectData.get("partyId").toString();
+			String memberId = selectData.get("memberId").toString();
+			PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberId, Integer.parseInt(partyId), null);
+			int partyMemberId = partyMemberService.getPartyMemberId(partyMemberModel);
+			
 			MemberScheduleModel memberScheduleModel = new MemberScheduleModel(
-					0, Integer.parseInt(selectData.get("partyMemberId")
-							.toString()), Integer.parseInt(selectData.get(
+					0, partyMemberId, Integer.parseInt(selectData.get(
 							"year").toString()), Integer.parseInt(selectData
 							.get("month").toString()),
 					Integer.parseInt(selectData.get("day").toString()),
