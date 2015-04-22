@@ -57,6 +57,7 @@ public class MemberScheduleController {
 		JSONObject selectData = null;
 		JSONArray jsonArray = null;
 		try {
+			System.out.println("@@ ggg "+data);
 			jsonArray = (JSONArray) parser.parse(data);
 		} catch (ParseException e) {
 			e.printStackTrace();

@@ -1,13 +1,15 @@
 package com.lg.team3.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,6 +38,29 @@ public class PartyController {
 	@ResponseBody
 	public JSONObject createParty(HttpServletRequest request) {
 		JSONObject jObject = new JSONObject();
+		System.out.println("@ "+request.getRequestURL());
+		System.out.println("@@ "+request.getRequestURI());
+		 
+		
+		//나는 지금 query String에 json이 오는걸 탐구했음
+		// httppost setEntity에 json을 넣어서 서버로 보냈는데
+		// 그 json을 읽는 방법을 몰라서, 밑에를 하다 말았음
+		//http://bethecoder.com/applications/tutorials/tools-and-libs/commons-http-client/http-post-request-with-string-entity-body.html
+		// 여기를 보고 request body를 똑같이 따라했지
+		//inputstream 읽는법을 모르겠어. 이걸 하다 집에 갓어. 너가 해야해
+		InputStream input;
+		try {
+			input = request.getInputStream();
+			String requestBody = input.toString();
+			 if (requestBody != null && requestBody.trim().length() > 0) {
+				 
+				 System.out.println(requestBody);
+			 }
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		System.out.println("createParty : "+request.getParameter("partySchedule"));
 		/* Login Check */
 		MemberModel memberModel = new MemberModel(
