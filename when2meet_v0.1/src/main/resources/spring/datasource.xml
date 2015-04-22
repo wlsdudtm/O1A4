@@ -7,7 +7,7 @@
 <!-- DataSource Configuration -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.0.115:3306/when2meet"/>
+        <property name="url" value="jdbc:mysql://192.168.0.115:3306/when2meet_v2"/>
         <property name="username" value="root"/>
         <property name="password" value="1234"/>
     </bean>
@@ -38,7 +38,7 @@
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>  
 	
-	<bean id="SelectedTimeDao" class="com.lg.team3.dao.SelectedTimeDao">
+	<bean id="MemberScheduleDao" class="com.lg.team3.dao.MemberScheduleDao">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>  
 	
