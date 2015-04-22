@@ -12,6 +12,16 @@
 		<result column="from_hour" property="fromHour" />
 		<result column="to_hour" property="toHour" />
 	</resultMap>
+	
+	<resultMap type="com.lg.team3.model.TimeInfoModel" id="timeInfoModel">
+		<result column="phone_no" property="phoneNo" />
+		<result column="name" property="name" />
+		<result column="year" property="year" />
+		<result column="month" property="month" />
+		<result column="day" property="day" />
+		<result column="from_hour" property="fromHour" />
+		<result column="to_hour" property="toHour" />
+	</resultMap>
 
 	<sql id="Selected_Time_Column_List">
 		party_member_id, year, month, day, from_hour, to_hour
@@ -27,8 +37,14 @@
 	</insert>
 	
 	
-	<select id="">
-	
+	<select id="getSelectedTime" resultMap="timeInfoModel" parameterType="int">
+		select 
+		 m.phone_no, m.name, year, month, day, from_hour, to_hour
+		 from member m,
+		(select 
+		  member_id, party_id, year, month, day, from_hour, to_hour
+		 from party_member pm, selected_time st where pm.party_id=#{value} and pm._id=st.party_member_id) sel
+		where m._id=sel.member_id
 	</select>
 	
 </mapper>

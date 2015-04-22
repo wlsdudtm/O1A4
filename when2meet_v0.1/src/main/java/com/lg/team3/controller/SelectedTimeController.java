@@ -1,9 +1,14 @@
 package com.lg.team3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 //import net.sf.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lg.team3.model.MemberModel;
 import com.lg.team3.model.SelectedTimeModel;
+import com.lg.team3.model.TimeInfoModel;
 import com.lg.team3.service.MemberService;
 import com.lg.team3.service.SelectedTimeService;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 @Controller
 public class SelectedTimeController {
@@ -82,5 +83,18 @@ public class SelectedTimeController {
 		jObject.put("isSuccess", "true");
 
 		return jObject;
+	}
+	
+	@RequestMapping("/getSelectedTime")
+	@ResponseBody
+	public String getSelectedTime(HttpServletRequest request){
+		
+		JSONObject jObject = new JSONObject();
+		
+		List<TimeInfoModel> selectedTimeList = selectedTimeService.getSelectedTime(Integer.parseInt(request.getParameter("partyId")));
+		
+		jObject.put("timeList", net.sf.json.JSONArray.fromObject(selectedTimeList));
+		System.out.println("getSelectedTime : "+jObject);
+		return jObject.toString();
 	}
 }
