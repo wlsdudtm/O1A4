@@ -30,5 +30,9 @@
 		select * from member where _id = #{id}
 	</select>
 	
+	<select id="getMembersById" resultMap="memberModel" parameterType="String">
+		select * from member where _id  like CONCAT('%',#{value},'%')
+
+	</select>
 
 </mapper>

@@ -28,7 +28,7 @@
 		member_id, party_id
 	</sql>
 
-	<select id="getMyParty" parameterType="int" resultMap="partyMemberModel">
+	<select id="getMyParty" parameterType="String" resultMap="partyMemberModel">
 		select * from party_member where member_id=#{value}
 	</select>
 	
@@ -49,5 +49,16 @@
 			#{memberId}, #{partyId}
 		)
 	</insert>
+	
+	<delete id="deletePartyMember" parameterType="com.lg.team3.model.PartyMemberModel">
+		delete from party_member
+		where member_id=#{memberId}
+		and
+		party_id=#{partyId}
+	</delete>
+	
+	<select id="isExistPartyMember" resultType="int" parameterType="int">
+		select count(1) from party_member where party_id=#{value}
+	</select>
 	
 </mapper>

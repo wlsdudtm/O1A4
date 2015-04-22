@@ -1,5 +1,7 @@
 package com.lg.team3.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,8 @@ public class MemberService {
 		return memberDao.isExist(memberModel);
 	}
 
-
+	//아이디가 포함된 멤버들 가져오기
+	public List<MemberModel> getMembersById(String memberId){
+		return memberDao.getMembersById(memberId);
+	}
 }

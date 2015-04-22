@@ -1,5 +1,7 @@
 package com.lg.team3.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.lg.team3.model.MemberModel;
@@ -19,5 +21,8 @@ public class MemberDao extends SqlSessionDaoSupport{
 	public MemberModel isExist(MemberModel memberModel){
 		return getSqlSession().selectOne(namespace+"isExist", memberModel);
 	}
-
+	
+	public List<MemberModel> getMembersById(String memberId){
+		return getSqlSession().selectList(namespace+"getMembersById", memberId);
+	}
 }

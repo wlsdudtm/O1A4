@@ -28,4 +28,11 @@
 		select * from party where master_id = #{value} order by _id desc limit 1
 	</select>
 
+	<delete id="delteParty" parameterType="int">
+		delete from party where _id=#{value}
+	</delete>
+
+	<select id="getPartyById" resultMap="partyModel" parameterType="int">
+		select * from party where _id=#{value}
+	</select>
 </mapper>

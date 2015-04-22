@@ -11,6 +11,17 @@
 		<result column="month" property="month" />
 		<result column="day" property="day" />
 	</resultMap>
+	
+	<resultMap type="com.lg.team3.model.PartyInfoModel" id="partyInfoModel">
+		<result column="party_id" property="partyId" />
+		<result column="year" property="year" />
+		<result column="month" property="month" />
+		<result column="day" property="day" />
+		<result column="title" property="title" />
+		<result column="from_hour" property="fromHour" />
+		<result column="to_hour" property="toHour" />
+	</resultMap>
+	
 	<sql id="Party_Schedule_Column_List">
 		party_id, year, month, day
 	</sql>
@@ -23,4 +34,11 @@
 			#{partyId}, #{year}, #{month}, #{day}
 		)
 	</insert>
+	
+	<select id="getPartyInfo" parameterType="int" resultMap="partyInfoModel">
+		select ps.party_id, year, month, day, title, from_hour, to_hour 
+		from party_schedule ps, party p 
+		where 
+		p._id=ps.party_id and ps.party_id=#{value}
+	</select>
 </mapper>

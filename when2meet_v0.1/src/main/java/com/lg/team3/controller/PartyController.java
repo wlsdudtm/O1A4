@@ -1,6 +1,12 @@
 package com.lg.team3.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lg.team3.model.MemberModel;
+import com.lg.team3.model.PartyInfoModel;
 import com.lg.team3.model.PartyMemberModel;
 import com.lg.team3.model.PartyModel;
 import com.lg.team3.model.PartyScheduleModel;
@@ -53,7 +60,7 @@ public class PartyController {
 		//PartyModel partyModel = new PartyModel(0, "Yaho!", 10, 12, "010", null);	//TODO: master id 수정
 
 		partyService.insertParty(partyModel);
-		partyModel = partyService.getLastParty("010");	//TODO: master_id 수정
+		partyModel = partyService.getLastParty(memberModel.getId());	//TODO: master_id 수정
 		System.out.println(partyModel);
 		JSONParser parser = new JSONParser();
 		JSONObject selectData = null;
@@ -81,5 +88,35 @@ public class PartyController {
 		jObject.put("isSuccess", "true");
 		
 		return jObject;
+	}
+	
+	@RequestMapping("/getPartyInfo")
+	@ResponseBody
+	public String getPartyInfo(HttpServletRequest request, HttpServletResponse response){
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.setCharacterEncoding("utf-8");
+		JSONObject jObject = new JSONObject();
+		List<PartyInfoModel> partyInfoList = partyService.getPartyInfo(Integer.parseInt(request.getParameter("partyId")));
+		System.out.println(partyInfoList);
+		jObject.put("partyInfoList", net.sf.json.JSONArray.fromObject(partyInfoList));
+		String str = jObject.toString();
+		String encode_str = "";
+		String decode_str = "";
+		try {
+			encode_str = URLEncoder.encode(str, "UTF-8");
+			System.out.println("@"+str);
+			System.out.println("@@ "+encode_str);
+			decode_str = URLDecoder.decode(encode_str, "UTF-8");
+			System.out.println("@@@ "+decode_str);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return str;
 	}
 }

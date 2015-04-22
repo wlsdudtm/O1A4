@@ -1,7 +1,10 @@
 package com.lg.team3.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,7 @@ public class MemberController {
 				request.getParameter("phoneNo"), request.getParameter("pwd"),
 				request.getParameter("name"));
 		JSONObject jObject = new JSONObject();
-		
+		System.out.println(request.getParameter("name"));
 		if(memberService.isExist(memberModel)!=null) {
 			jObject.put("isSuccess", "duplicated");
 		}else{
@@ -60,4 +63,16 @@ public class MemberController {
 		 System.out.println(result);
 		return jObject;
 	}
+	
+	@RequestMapping("/getMembersById")
+	@ResponseBody
+	public String getMembersById(HttpServletRequest request){
+		JSONObject jObject = new JSONObject();
+		
+		List<MemberModel> memberList = memberService.getMembersById(request.getParameter("memberId"));
+		jObject.put("memberList", JSONArray.fromObject(memberList));
+		
+		return jObject.toString();
+	}
+	
 }

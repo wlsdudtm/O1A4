@@ -12,7 +12,7 @@ public class PartyMemberDao extends SqlSessionDaoSupport {
 	private final String namespace = "com.lg.team3.partyMember.";
 	private final String pScheduleNamespace = "com.lg.team3.partySchedule.";
 
-	public List<PartyMemberModel> getMyParty(int id) {
+	public List<PartyMemberModel> getMyParty(String id) {
 		return getSqlSession().selectList(namespace + "getMyParty", id);
 	}
 
@@ -30,5 +30,13 @@ public class PartyMemberDao extends SqlSessionDaoSupport {
 		int result = getSqlSession().insert(namespace + "insertPartyMember",
 				partyMemberModel);
 		return (result != 0) ? (true) : (false);
+	}
+	
+	public boolean deletePartyMember(PartyMemberModel partyMemberModel){
+		return getSqlSession().delete(namespace+"deletePartyMember", partyMemberModel)>0?true:false;
+	}
+	
+	public int isExistPartyMember(int partyId){
+		return getSqlSession().selectOne(namespace+"isExistPartyMember", partyId);
 	}
 }

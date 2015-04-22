@@ -1,10 +1,13 @@
 package com.lg.team3.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lg.team3.dao.PartyDao;
 import com.lg.team3.dao.PartyMemberDao;
+import com.lg.team3.model.PartyInfoModel;
 import com.lg.team3.model.PartyMemberModel;
 import com.lg.team3.model.PartyModel;
 import com.lg.team3.model.PartyScheduleModel;
@@ -27,5 +30,12 @@ public class PartyService {
 	public boolean insertPartyMember(PartyMemberModel partyMemberModel) {
 		return partyMemberDao.insertPartyMember(partyMemberModel);
 	}
+	public PartyModel getPartyById(int partyId){
+		return partyDao.getPartyById(partyId);
+	}
 	
+	public List<PartyInfoModel> getPartyInfo(int partyId){
+		return partyDao.getPartyInfo(partyId);
+		
+	}
 }
