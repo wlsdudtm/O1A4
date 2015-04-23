@@ -1,6 +1,7 @@
 package com.lg.team3.controller;
 
 //import net.sf.json.JSONObject;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,7 +82,7 @@ public class MemberScheduleController {
 				System.out.println("SUCCESS ADD!!! : " + selectData);
 			} catch (Exception e) {
 				System.out.println("addSelectedTime Error!!! : " + selectData);
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 		/* get jsonArray */
@@ -89,6 +90,88 @@ public class MemberScheduleController {
 		jObject.put("isSuccess", "true");
 
 		return jObject;
+	}
+	
+	
+	@RequestMapping("/updateMemberSchedule")
+	@ResponseBody
+	public String updateMemberSchedule(HttpServletRequest request){
+		JSONObject jObject = new JSONObject();
+		JSONParser parser = new JSONParser();
+		String data = request.getParameter("data");
+		
+		JSONObject selectData = null;
+		JSONArray jsonArray = null;
+		try {
+			jsonArray = (JSONArray) parser.parse(data);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		//DB에 저장되어 있는 기존 스케줄
+		List<MemberScheduleModel> serverScheduleList = null;
+		
+		//클라이언트가 보낸 스케줄
+		List<MemberScheduleModel> clientScheduleList = new ArrayList<MemberScheduleModel>();
+		
+		for (int i = 0; i < jsonArray.size(); i++) {
+			selectData = (JSONObject) jsonArray.get(i);
+
+			String partyId = selectData.get("partyId").toString();
+			String memberId = selectData.get("memberId").toString();
+			
+			PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberId, Integer.parseInt(partyId), null);
+			int partyMemberId = partyMemberService.getPartyMemberId(partyMemberModel);
+			
+			MemberScheduleModel clientSchedule = new MemberScheduleModel(
+					0, partyMemberId, Integer.parseInt(selectData.get(
+							"year").toString()), Integer.parseInt(selectData
+							.get("month").toString()),
+					Integer.parseInt(selectData.get("day").toString()),
+					Integer.parseInt(selectData.get("hour").toString()));
+		
+			clientScheduleList.add(clientSchedule);
+			serverScheduleList = memberScheduleService.getMemberScheduleById(partyMemberId);
+		
+			int flag = 0;
+			
+			for(MemberScheduleModel serverSchedule : serverScheduleList){
+				//받은거가 기존에 있던거에 없다
+				if(! (clientSchedule.getYear() == serverSchedule.getYear()
+						&& clientSchedule.getMonth() == serverSchedule.getMonth()
+						&& clientSchedule.getDay() == serverSchedule.getDay()
+						&& clientSchedule.getHour() == serverSchedule.getHour())){
+					flag=1;
+				}
+			}
+			
+			if(flag==1){
+				try{
+					memberScheduleService.insertMemberSchedule(clientSchedule);
+				}catch(Exception e){
+					
+				}
+			}
+		}
+		
+		for(MemberScheduleModel serverSchedule : serverScheduleList){
+			int flag = 0;
+			for(MemberScheduleModel clientSchedule : clientScheduleList){
+				if(clientSchedule.getYear() == serverSchedule.getYear()
+						&& clientSchedule.getMonth() == serverSchedule.getMonth()
+						&& clientSchedule.getDay() == serverSchedule.getDay()
+						&& clientSchedule.getHour() == serverSchedule.getHour()){
+					flag = 1;
+				}
+			}
+			if(flag == 0){
+				memberScheduleService.deleteMemberSchedule(serverSchedule.getId());
+			}
+		}
+		
+		jObject.put("isSuccess", "true");
+		
+		return jObject.toString();
 	}
 
 	@RequestMapping("/getMemberSchedule")

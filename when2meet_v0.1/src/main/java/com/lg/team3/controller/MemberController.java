@@ -73,7 +73,7 @@ public class MemberController {
 		JSONObject jObject = new JSONObject();
 		
 		List<MemberModel> memberList = memberService.getMembersById(request.getParameter("memberId"));
-		
+		System.out.println("@@"+ request.getParameter("memberId")+" "+request.getParameter("masterId"));
 		//방장아이디 제외
 		String masterId = request.getParameter("masterId");
 		for(int i = 0 ; i < memberList.size() ; i++) {

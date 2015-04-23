@@ -35,6 +35,27 @@
 		)
 	</insert>
 	
+	
+	<select id="isExistMemberSchedule" parameterType="com.lg.team3.model.MemberScheduleModel" resultType="int">
+		select count(1) from member_schedule 
+		where 
+		party_member_id=#{partyMemberId} 
+		and year=#{year} 
+		and month=#{month}
+		and day=#{day} 
+		and hour=#{hour}
+	</select>
+	
+	<select id="getMemberScheduleById" parameterType="int" resultMap="memberScheduleModel">
+		select * from member_schedule
+		where
+		party_member_id=#{value}
+	</select>
+	
+	<delete id="deleteMemberSchedule" parameterType="int">
+		delete from member_schedule where _id=#{value}
+	</delete>
+	
 	<select id="getMemberSchedule" resultMap="mScheduleInfoModel" parameterType="int">
 		select 
 		 m._id, m.name, year, month, day, hour

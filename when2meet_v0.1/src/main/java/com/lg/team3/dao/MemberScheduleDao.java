@@ -19,4 +19,16 @@ public class MemberScheduleDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectList(namespace+"getMemberSchedule", partyId);
 	}
 	
+	public List<MemberScheduleModel> getMemberScheduleById(int partyMemberId){
+		return getSqlSession().selectList(namespace+"getMemberScheduleById", partyMemberId);
+	}
+	
+	public boolean deleteMemberSchedule(int id){
+		return getSqlSession().delete(namespace+"deleteMemberSchedule", id)>0?true:false;
+	}
+	
+	public int isExistMemberSchedule(MemberScheduleModel memberScheduleModel){
+		return getSqlSession().selectOne(namespace+"isExistMemberSchedule", memberScheduleModel);
+	}
+	
 }

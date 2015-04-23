@@ -21,4 +21,16 @@ public class MemberScheduleService {
 	public List<MScheduleInfoModel> getMemberSchedule(int partyId){
 		return memberScheduleDao.getMemberSchedule(partyId);
 	}
+	
+	public List<MemberScheduleModel> getMemberScheduleById(int partyMemberId){
+		return memberScheduleDao.getMemberScheduleById(partyMemberId);
+	}
+	
+	public boolean deleteMemberSchedule(int id){
+		return memberScheduleDao.deleteMemberSchedule(id);
+	}
+	
+	public int isExistMemberSchedule(MemberScheduleModel memberScheduleModel){
+		return memberScheduleDao.isExistMemberSchedule(memberScheduleModel);
+	}
 }
