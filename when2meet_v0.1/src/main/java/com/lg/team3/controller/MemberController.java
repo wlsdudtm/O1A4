@@ -73,6 +73,15 @@ public class MemberController {
 		JSONObject jObject = new JSONObject();
 		
 		List<MemberModel> memberList = memberService.getMembersById(request.getParameter("memberId"));
+		
+		//방장아이디 제외
+		String masterId = request.getParameter("masterId");
+		for(int i = 0 ; i < memberList.size() ; i++) {
+			if(masterId.equals(memberList.get(i).getId())) {
+				memberList.remove(i);
+			}
+		}
+		
 		jObject.put("memberList", JSONArray.fromObject(memberList));
 		
 		String str = jObject.toString();
