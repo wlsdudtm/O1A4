@@ -65,5 +65,4 @@ public class PartyScheduleModel {
 				+ ", year=" + year + ", month=" + month + ", day=" + day + "]";
 	}
 	
-	
 }
