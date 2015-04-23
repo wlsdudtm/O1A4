@@ -76,12 +76,13 @@ public class MemberScheduleController {
 							.get("month").toString()),
 					Integer.parseInt(selectData.get("day").toString()),
 					Integer.parseInt(selectData.get("hour").toString()));
-
-			if (memberScheduleService.insertMemberSchedule(memberScheduleModel) == false) {
+			try {
+				memberScheduleService.insertMemberSchedule(memberScheduleModel);
+				System.out.println("SUCCESS ADD!!! : " + selectData);
+			} catch (Exception e) {
 				System.out.println("addSelectedTime Error!!! : " + selectData);
-				continue;
+				e.printStackTrace();
 			}
-			System.out.println("SUCCESS ADD!!! : " + selectData);
 		}
 		/* get jsonArray */
 
