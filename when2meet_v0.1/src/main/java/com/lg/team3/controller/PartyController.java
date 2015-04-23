@@ -37,6 +37,7 @@ public class PartyController {
 	@RequestMapping("/createParty")
 	@ResponseBody
 	public JSONObject createParty(HttpServletRequest request) {
+		System.out.println("CreateParty에 왔떠");
 		JSONObject jObject = new JSONObject();
 		
 		/* Login Check */

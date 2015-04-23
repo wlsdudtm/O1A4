@@ -1,6 +1,8 @@
 package com.lg.team3.controller;
 
 //import net.sf.json.JSONObject;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,72 +102,82 @@ public class MemberScheduleController {
 		JSONParser parser = new JSONParser();
 		String data = request.getParameter("data");
 		
-		JSONObject selectData = null;
-		JSONArray jsonArray = null;
-		try {
-			jsonArray = (JSONArray) parser.parse(data);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		String partyIdparam =  request.getParameter("partyId");
+		String memberIdparam =  request.getParameter("memberId");
 		
-		//DB에 저장되어 있는 기존 스케줄
-		List<MemberScheduleModel> serverScheduleList = null;
-		
-		//클라이언트가 보낸 스케줄
-		List<MemberScheduleModel> clientScheduleList = new ArrayList<MemberScheduleModel>();
-		
-		for (int i = 0; i < jsonArray.size(); i++) {
-			selectData = (JSONObject) jsonArray.get(i);
+		PartyMemberModel partyMemberModelTmp = new PartyMemberModel(0, memberIdparam, Integer.parseInt(partyIdparam), null);
+		int partyMemberIdTmp = partyMemberService.getPartyMemberId(partyMemberModelTmp);
+		List<MemberScheduleModel> serverScheduleList 
+				= memberScheduleService.getMemberScheduleById(partyMemberIdTmp);
+		if(data.equals("[]")){
+			for(MemberScheduleModel serverSchedule : serverScheduleList){
+				memberScheduleService.deleteMemberSchedule(serverSchedule.getId());
+			}
+		}else{
+			JSONObject selectData = null;
+			JSONArray jsonArray = null;
+			try {
+				jsonArray = (JSONArray) parser.parse(data);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			//클라이언트가 보낸 스케줄
+			List<MemberScheduleModel> clientScheduleList = null;
+			
+			for (int i = 0; i < jsonArray.size(); i++) {
+				clientScheduleList = new ArrayList<MemberScheduleModel>();
+				selectData = (JSONObject) jsonArray.get(i);
 
-			String partyId = selectData.get("partyId").toString();
-			String memberId = selectData.get("memberId").toString();
+				String partyId = selectData.get("partyId").toString();
+				String memberId = selectData.get("memberId").toString();
+				
+				PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberId, Integer.parseInt(partyId), null);
+				int partyMemberId = partyMemberService.getPartyMemberId(partyMemberModel);
+				
+				MemberScheduleModel clientSchedule = new MemberScheduleModel(
+						0, partyMemberId, Integer.parseInt(selectData.get(
+								"year").toString()), Integer.parseInt(selectData
+								.get("month").toString()),
+						Integer.parseInt(selectData.get("day").toString()),
+						Integer.parseInt(selectData.get("hour").toString()));
 			
-			PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberId, Integer.parseInt(partyId), null);
-			int partyMemberId = partyMemberService.getPartyMemberId(partyMemberModel);
+				clientScheduleList.add(clientSchedule);
+				serverScheduleList = memberScheduleService.getMemberScheduleById(partyMemberId);
 			
-			MemberScheduleModel clientSchedule = new MemberScheduleModel(
-					0, partyMemberId, Integer.parseInt(selectData.get(
-							"year").toString()), Integer.parseInt(selectData
-							.get("month").toString()),
-					Integer.parseInt(selectData.get("day").toString()),
-					Integer.parseInt(selectData.get("hour").toString()));
-		
-			clientScheduleList.add(clientSchedule);
-			serverScheduleList = memberScheduleService.getMemberScheduleById(partyMemberId);
-		
-			int flag = 0;
+				int flag = 0;
+				
+				for(MemberScheduleModel serverSchedule : serverScheduleList){
+					if(clientSchedule.getYear() == serverSchedule.getYear()
+							&& clientSchedule.getMonth() == serverSchedule.getMonth()
+							&& clientSchedule.getDay() == serverSchedule.getDay()
+							&& clientSchedule.getHour() == serverSchedule.getHour()){
+						flag=1;
+					}
+				}
+				
+				if(flag==0){
+					try{
+						memberScheduleService.insertMemberSchedule(clientSchedule);
+					}catch(Exception e){
+						
+					}
+				}
+			}
 			
 			for(MemberScheduleModel serverSchedule : serverScheduleList){
-				//받은거가 기존에 있던거에 없다
-				if(! (clientSchedule.getYear() == serverSchedule.getYear()
-						&& clientSchedule.getMonth() == serverSchedule.getMonth()
-						&& clientSchedule.getDay() == serverSchedule.getDay()
-						&& clientSchedule.getHour() == serverSchedule.getHour())){
-					flag=1;
+				int flag = 0;
+				for(MemberScheduleModel clientSchedule : clientScheduleList){
+					if(clientSchedule.getYear() == serverSchedule.getYear()
+							&& clientSchedule.getMonth() == serverSchedule.getMonth()
+							&& clientSchedule.getDay() == serverSchedule.getDay()
+							&& clientSchedule.getHour() == serverSchedule.getHour()){
+						flag = 1;
+					}
 				}
-			}
-			
-			if(flag==1){
-				try{
-					memberScheduleService.insertMemberSchedule(clientSchedule);
-				}catch(Exception e){
-					
+				if(flag == 0){
+					memberScheduleService.deleteMemberSchedule(serverSchedule.getId());
 				}
-			}
-		}
-		
-		for(MemberScheduleModel serverSchedule : serverScheduleList){
-			int flag = 0;
-			for(MemberScheduleModel clientSchedule : clientScheduleList){
-				if(clientSchedule.getYear() == serverSchedule.getYear()
-						&& clientSchedule.getMonth() == serverSchedule.getMonth()
-						&& clientSchedule.getDay() == serverSchedule.getDay()
-						&& clientSchedule.getHour() == serverSchedule.getHour()){
-					flag = 1;
-				}
-			}
-			if(flag == 0){
-				memberScheduleService.deleteMemberSchedule(serverSchedule.getId());
 			}
 		}
 		
@@ -187,6 +199,14 @@ public class MemberScheduleController {
 		jObject.put("voteList",
 				net.sf.json.JSONArray.fromObject(selectedTimeList));
 		System.out.println("getMemberSchedule : " + jObject);
-		return jObject.toString();
+		
+		String str = jObject.toString();
+		String encode_str = "";
+		try {
+			encode_str = URLEncoder.encode(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return encode_str;
 	}
 }
