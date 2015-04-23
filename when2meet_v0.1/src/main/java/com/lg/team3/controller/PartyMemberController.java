@@ -58,7 +58,7 @@ public class PartyMemberController {
 		partyMemberModel.setPartyId(Integer.parseInt(request.getParameter("partyId")));
 		
 		JSONObject jObject = new JSONObject();
-		
+		System.out.println("@@ deletePartyMember");
 		if(partyMemberService.deletePartyMember(partyMemberModel)){
 			jObject.put("isSuccess", "true");
 		}else{

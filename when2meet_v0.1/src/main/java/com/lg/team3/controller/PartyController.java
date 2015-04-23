@@ -38,30 +38,7 @@ public class PartyController {
 	@ResponseBody
 	public JSONObject createParty(HttpServletRequest request) {
 		JSONObject jObject = new JSONObject();
-		System.out.println("@ "+request.getRequestURL());
-		System.out.println("@@ "+request.getRequestURI());
-		 
 		
-		//나는 지금 query String에 json이 오는걸 탐구했음
-		// httppost setEntity에 json을 넣어서 서버로 보냈는데
-		// 그 json을 읽는 방법을 몰라서, 밑에를 하다 말았음
-		//http://bethecoder.com/applications/tutorials/tools-and-libs/commons-http-client/http-post-request-with-string-entity-body.html
-		// 여기를 보고 request body를 똑같이 따라했지
-		//inputstream 읽는법을 모르겠어. 이걸 하다 집에 갓어. 너가 해야해
-		InputStream input;
-		try {
-			input = request.getInputStream();
-			String requestBody = input.toString();
-			 if (requestBody != null && requestBody.trim().length() > 0) {
-				 
-				 System.out.println(requestBody);
-			 }
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		System.out.println("createParty : "+request.getParameter("partySchedule"));
 		/* Login Check */
 		MemberModel memberModel = new MemberModel(
 				request.getParameter("id"), request.getParameter("pwd"),
@@ -77,7 +54,8 @@ public class PartyController {
 		String title = request.getParameter("title");
 		int fromHour = Integer.parseInt(request.getParameter("fromHour"));
 		int toHour = Integer.parseInt(request.getParameter("toHour"));
-		String partySchedule = request.getParameter("PartySchedule"); //JSON
+		String partySchedule = request.getParameter("partySchedule"); //JSON
+		System.out.println( partySchedule);
 //		String partySchedule = "[{\"year\":\"2015\", \"month\":\"4\", \"day\":\"15\"},"
 //				+ "{\"year\":\"2015\", \"month\":\"4\", \"day\":\"16\"},"
 //				+ "{\"year\":\"2015\", \"month\":\"4\", \"day\":\"17\"}]";
@@ -111,6 +89,7 @@ public class PartyController {
 		partyService.insertPartyMember(partyMemberModel);
 
 		jObject.put("isSuccess", "true");
+		jObject.put("partyId", partyModel.getId());
 		
 		return jObject;
 	}
