@@ -104,7 +104,6 @@ public class MemberScheduleController {
 		
 		String partyIdparam =  request.getParameter("partyId");
 		String memberIdparam =  request.getParameter("memberId");
-		
 		PartyMemberModel partyMemberModelTmp = new PartyMemberModel(0, memberIdparam, Integer.parseInt(partyIdparam), null);
 		int partyMemberIdTmp = partyMemberService.getPartyMemberId(partyMemberModelTmp);
 		List<MemberScheduleModel> serverScheduleList 
@@ -123,10 +122,9 @@ public class MemberScheduleController {
 			}
 			
 			//클라이언트가 보낸 스케줄
-			List<MemberScheduleModel> clientScheduleList = null;
+			List<MemberScheduleModel> clientScheduleList = new ArrayList<MemberScheduleModel>();
 			
 			for (int i = 0; i < jsonArray.size(); i++) {
-				clientScheduleList = new ArrayList<MemberScheduleModel>();
 				selectData = (JSONObject) jsonArray.get(i);
 
 				String partyId = selectData.get("partyId").toString();
@@ -134,7 +132,7 @@ public class MemberScheduleController {
 				
 				PartyMemberModel partyMemberModel = new PartyMemberModel(0, memberId, Integer.parseInt(partyId), null);
 				int partyMemberId = partyMemberService.getPartyMemberId(partyMemberModel);
-				
+				System.out.println(partyMemberId);
 				MemberScheduleModel clientSchedule = new MemberScheduleModel(
 						0, partyMemberId, Integer.parseInt(selectData.get(
 								"year").toString()), Integer.parseInt(selectData

@@ -81,7 +81,7 @@ public class MemberController {
 				memberList.remove(i);
 			}
 		}
-		
+		System.out.println("@@@ "+memberList);
 		jObject.put("memberList", JSONArray.fromObject(memberList));
 		
 		String str = jObject.toString();
